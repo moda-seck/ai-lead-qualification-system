@@ -231,13 +231,7 @@
         160
       ],
       "id": "09c3c3d7-7334-45d5-9ab4-a8a3d61522a5",
-      "name": "Groq Chat Model",
-      "credentials": {
-        "groqApi": {
-          "id": "TZVobcHlXhkV23Tx",
-          "name": "Groq account"
-        }
-      }
+      "name": "Groq Chat Model"
     },
     {
       "parameters": {
@@ -419,13 +413,7 @@
         -660
       ],
       "id": "6441a755-2896-492a-ac3d-600b9e0b0cb3",
-      "name": "Groq Chat Model1",
-      "credentials": {
-        "groqApi": {
-          "id": "TZVobcHlXhkV23Tx",
-          "name": "Groq account"
-        }
-      }
+      "name": "Groq Chat Model1"
     },
     {
       "parameters": {
@@ -461,10 +449,9 @@
         "operation": "get",
         "dataTableId": {
           "__rl": true,
-          "value": "E34NMADiGvBxNYvK",
+          "value": "",
           "mode": "list",
-          "cachedResultName": "portfolio_leads",
-          "cachedResultUrl": "/projects/cWn8rG4KEJlMVD7r/datatables/E34NMADiGvBxNYvK"
+          "cachedResultName": "portfolio_leads"
         },
         "filters": {
           "conditions": [
@@ -543,10 +530,9 @@
       "parameters": {
         "dataTableId": {
           "__rl": true,
-          "value": "E34NMADiGvBxNYvK",
+          "value": "",
           "mode": "list",
-          "cachedResultName": "portfolio_leads",
-          "cachedResultUrl": "/projects/cWn8rG4KEJlMVD7r/datatables/E34NMADiGvBxNYvK"
+          "cachedResultName": "portfolio_leads"
         },
         "columns": {
           "mappingMode": "autoMapInputData",
@@ -864,10 +850,9 @@
         "operation": "update",
         "dataTableId": {
           "__rl": true,
-          "value": "E34NMADiGvBxNYvK",
+          "value": "",
           "mode": "list",
-          "cachedResultName": "portfolio_leads",
-          "cachedResultUrl": "/projects/cWn8rG4KEJlMVD7r/datatables/E34NMADiGvBxNYvK"
+          "cachedResultName": "portfolio_leads"
         },
         "filters": {
           "conditions": [
@@ -1246,14 +1231,7 @@
         80
       ],
       "id": "77212fd8-a297-41f7-84a8-3e9b959da9cd",
-      "name": "WebhookLead",
-      "webhookId": "94adb0d0-b328-4543-82fb-375331143fc2",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "9z3Jq0RojZ8JKAz1",
-          "name": "Header Auth account"
-        }
-      }
+      "name": "WebhookLead"
     },
     {
       "parameters": {
@@ -1313,13 +1291,7 @@
         160
       ],
       "id": "12d6a4ee-0cb2-46de-8ff3-41561980cfc0",
-      "name": "Groq Chat Model2",
-      "credentials": {
-        "groqApi": {
-          "id": "TZVobcHlXhkV23Tx",
-          "name": "Groq account"
-        }
-      }
+      "name": "Groq Chat Model2"
     },
     {
       "parameters": {
@@ -1379,13 +1351,7 @@
         980
       ],
       "id": "a00711d7-681c-4e34-8fba-5acc43601ba1",
-      "name": "Groq Chat Model3",
-      "credentials": {
-        "groqApi": {
-          "id": "TZVobcHlXhkV23Tx",
-          "name": "Groq account"
-        }
-      }
+      "name": "Groq Chat Model3"
     },
     {
       "parameters": {
@@ -1487,10 +1453,9 @@
       "parameters": {
         "dataTableId": {
           "__rl": true,
-          "value": "sy4uMqi6ZrqHnRBL",
+          "value": "",
           "mode": "list",
-          "cachedResultName": "portfolio_lead_events",
-          "cachedResultUrl": "/projects/cWn8rG4KEJlMVD7r/datatables/sy4uMqi6ZrqHnRBL"
+          "cachedResultName": "portfolio_lead_events"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -1648,10 +1613,9 @@
       "parameters": {
         "dataTableId": {
           "__rl": true,
-          "value": "sy4uMqi6ZrqHnRBL",
+          "value": "",
           "mode": "list",
-          "cachedResultName": "portfolio_lead_events",
-          "cachedResultUrl": "/projects/cWn8rG4KEJlMVD7r/datatables/sy4uMqi6ZrqHnRBL"
+          "cachedResultName": "portfolio_lead_events"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -1809,10 +1773,9 @@
       "parameters": {
         "dataTableId": {
           "__rl": true,
-          "value": "sy4uMqi6ZrqHnRBL",
+          "value": "",
           "mode": "list",
-          "cachedResultName": "portfolio_lead_events",
-          "cachedResultUrl": "/projects/cWn8rG4KEJlMVD7r/datatables/sy4uMqi6ZrqHnRBL"
+          "cachedResultName": "portfolio_lead_events"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -1970,10 +1933,9 @@
       "parameters": {
         "dataTableId": {
           "__rl": true,
-          "value": "sy4uMqi6ZrqHnRBL",
+          "value": "",
           "mode": "list",
-          "cachedResultName": "portfolio_lead_events",
-          "cachedResultUrl": "/projects/cWn8rG4KEJlMVD7r/datatables/sy4uMqi6ZrqHnRBL"
+          "cachedResultName": "portfolio_lead_events"
         },
         "columns": {
           "mappingMode": "defineBelow",
