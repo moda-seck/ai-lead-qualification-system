@@ -1,0 +1,2761 @@
+{
+  "name": "Portfolio 01 - AI Lead Qualification System - Portfolio Ready",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1480,
+        -160
+      ],
+      "id": "b8d1b2f7-ea20-42f0-9d7f-e5916ccbe07a",
+      "name": "TriggerManual"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "461df4b6-600a-46b1-8499-53cbaa599a2a",
+              "name": "lead_id",
+              "value": "LEAD-COLD-001",
+              "type": "string"
+            },
+            {
+              "id": "c31fdb5a-a395-4c51-a130-24bd7766381f",
+              "name": "full_name",
+              "value": "Thomas Leroy",
+              "type": "string"
+            },
+            {
+              "id": "d8b644bf-71a1-4a30-9f01-f6416fcc39d9",
+              "name": "email",
+              "value": "thomas.leroy@example.com",
+              "type": "string"
+            },
+            {
+              "id": "29f80b84-b80d-479f-a3e5-c99e80b13b56",
+              "name": "company",
+              "value": "SmallDesk",
+              "type": "string"
+            },
+            {
+              "id": "398e88a0-1e73-4f24-84aa-31c50ccab64b",
+              "name": "job_title",
+              "value": "assistant",
+              "type": "string"
+            },
+            {
+              "id": "e844473e-3d4f-49ff-ad02-16e2916765a6",
+              "name": "industry",
+              "value": "Technology",
+              "type": "string"
+            },
+            {
+              "id": "ebfa0e9f-01ee-4aa4-9540-5881b2cbe945",
+              "name": "company_size",
+              "value": 5,
+              "type": "number"
+            },
+            {
+              "id": "f8f9b94b-c6f7-4863-ad8a-8a84b5836194",
+              "name": "country",
+              "value": "France",
+              "type": "string"
+            },
+            {
+              "id": "1d78eabe-3943-475f-9429-759bdb85e677",
+              "name": "budget",
+              "value": 500,
+              "type": "number"
+            },
+            {
+              "id": "7dc4f20a-fade-470b-83cf-19a96b9a6e2c",
+              "name": "need",
+              "value": "Exploring AI automation possibilities",
+              "type": "string"
+            },
+            {
+              "id": "15f3a91f-e870-49c5-9582-666b50c06f3b",
+              "name": "timeline",
+              "value": "Maybe next year",
+              "type": "string"
+            },
+            {
+              "id": "c07c326a-098c-4897-9fa3-159f1ff04a9d",
+              "name": "source",
+              "value": "website",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        -1220,
+        -160
+      ],
+      "id": "0574a966-b4bb-466a-afb0-976aedb23650",
+      "name": "MockLead"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "2ec955c5-9e09-4926-b8b1-695c26d47bd7",
+              "leftValue": "={{ $json.lead_id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "c4b8d1a1-1c73-4210-9932-144611ccae19",
+              "leftValue": "={{ $json.full_name }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "0cd7ffae-8955-4bf3-8b52-d73c5d1c3a77",
+              "leftValue": "={{ $json.email }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "870128ae-5ede-4474-9b97-521df63e42da",
+              "leftValue": "={{ $json.company }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "1278583c-c719-4b25-bf53-ee3f22d81bbb",
+              "leftValue": "={{ $json.need }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -940,
+        -40
+      ],
+      "id": "a846be54-0a4b-40b4-8d4e-d9793022bca7",
+      "name": "ValidateLead"
+    },
+    {
+      "parameters": {
+        "errorMessage": "Invalid lead: one or more required fields are missing."
+      },
+      "type": "n8n-nodes-base.stopAndError",
+      "typeVersion": 1,
+      "position": [
+        -100,
+        360
+      ],
+      "id": "a728acba-e469-43de-9ab5-a6b404abd3ee",
+      "name": "RejectInvalidLead"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a B2B sales lead qualification assistant.\n\nAnalyze the following lead and assign a qualification score from 0 to 100.\n\nLead:\n- Name: {{ $json.full_name }}\n- Email: {{ $json.email }}\n- Company: {{ $json.company }}\n- Job title: {{ $json.job_title }}\n- Industry: {{ $json.industry }}\n- Company size: {{ $json.company_size }}\n- Country: {{ $json.country }}\n- Budget: {{ $json.budget }}\n- Need: {{ $json.need }}\n- Timeline: {{ $json.timeline }}\n- Source: {{ $json.source }}\n\nScoring guidelines:\n- Budget and purchasing capacity: 0-30 points\n- Urgency / timeline: 0-20 points\n- Decision-making authority: 0-20 points\n- Company fit and size: 0-15 points\n- Clarity and relevance of the need: 0-15 points\n\nQualification:\n- hot: score 75-100\n- warm: score 45-74\n- cold: score 0-44\n\nPriority:\n- high for hot leads\n- medium for warm leads\n- low for cold leads\n\nReturn only the requested structured output.\nKeep the reasoning concise and business-focused.",
+        "hasOutputParser": true,
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        240,
+        -80
+      ],
+      "id": "1123078a-e4fe-4724-b08e-e58696a0fafd",
+      "name": "QualifyLeadWithAI",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"lead_score\": {\n      \"type\": \"number\"\n    },\n    \"qualification\": {\n      \"type\": \"string\",\n      \"enum\": [\"hot\", \"warm\", \"cold\"]\n    },\n    \"priority\": {\n      \"type\": \"string\",\n      \"enum\": [\"high\", \"medium\", \"low\"]\n    },\n    \"reasoning\": {\n      \"type\": \"string\"\n    },\n    \"recommended_action\": {\n      \"type\": \"string\"\n    }\n  },\n  \"required\": [\n    \"lead_score\",\n    \"qualification\",\n    \"priority\",\n    \"reasoning\",\n    \"recommended_action\"\n  ]\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        430,
+        160
+      ],
+      "id": "e1a6f8e2-95fd-4e84-abfb-e127b597ea18",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-120b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        240,
+        160
+      ],
+      "id": "09c3c3d7-7334-45d5-9ab4-a8a3d61522a5",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "TZVobcHlXhkV23Tx",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{\n{\n  \"lead_id\": $(\"ValidateLead\").item.json.lead_id,\n  \"full_name\": $(\"ValidateLead\").item.json.full_name,\n  \"email\": $(\"ValidateLead\").item.json.email,\n  \"company\": $(\"ValidateLead\").item.json.company,\n  \"job_title\": $(\"ValidateLead\").item.json.job_title,\n  \"industry\": $(\"ValidateLead\").item.json.industry,\n  \"company_size\": $(\"ValidateLead\").item.json.company_size,\n  \"country\": $(\"ValidateLead\").item.json.country,\n  \"budget\": $(\"ValidateLead\").item.json.budget,\n  \"need\": $(\"ValidateLead\").item.json.need,\n  \"timeline\": $(\"ValidateLead\").item.json.timeline,\n  \"source\": $(\"ValidateLead\").item.json.source,\n\n  \"lead_score\": $json.output.lead_score,\n  \"qualification\": $json.output.qualification,\n  \"priority\": $json.output.priority,\n  \"reasoning\": $json.output.reasoning,\n  \"recommended_action\": $json.output.recommended_action,\n\n  \"qualified_at\": $now.toISO()\n}\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        760,
+        -80
+      ],
+      "id": "7fdc35b7-f0bb-44e9-89b2-a4555442ef6a",
+      "name": "BuildQualifiedLead"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.qualification }}",
+                    "rightValue": "hot",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "e5baa5c8-c060-4f92-825e-def9fde7fe2a"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "hot"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "03fc6a6e-8dc8-448a-873d-7ff27414605e",
+                    "leftValue": "={{ $json.qualification }}",
+                    "rightValue": "warm",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "warm"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "f87961b0-c462-437f-98ee-af757b4b90f2",
+                    "leftValue": "={{ $json.qualification }}",
+                    "rightValue": "cold",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "cold"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        1360,
+        -80
+      ],
+      "id": "69f1f6f8-35a2-4088-bce6-bcaeb71f2b07",
+      "name": "RouteLead"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{\n{\n  ...$json,\n  \"pipeline_stage\": \"sales_ready\",\n  \"action_type\": \"immediate_sales_followup\",\n  \"follow_up_within_hours\": 24,\n  \"assigned_team\": \"sales\",\n  \"next_step\": \"Draft a personalized outreach email and schedule a discovery call\"\n}\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        1660,
+        -900
+      ],
+      "id": "c4bb9e8d-d942-4355-8f49-c3b909bc4d5a",
+      "name": "PrepareHotLead"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{\n{\n  ...$json,\n  \"pipeline_stage\": \"nurturing\",\n  \"action_type\": \"warm_lead_followup\",\n  \"follow_up_within_hours\": 72,\n  \"assigned_team\": \"sales\",\n  \"next_step\": \"Send a personalized follow-up email and schedule a discovery call within 3 days\"\n}\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        1660,
+        -80
+      ],
+      "id": "c6d395d9-563e-489e-a41a-dfede30ee8a4",
+      "name": "PrepareWarmLead"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{\n{\n  ...$json,\n\n  \"pipeline_stage\": \"nurturing\",\n  \"action_type\": \"cold_lead_nurture\",\n  \"follow_up_within_hours\": 168,\n  \"assigned_team\": \"marketing\",\n  \"next_step\": \"Add the lead to a nurture sequence and send a low-pressure educational follow-up within 7 days\"\n}\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        1660,
+        740
+      ],
+      "id": "f3008d8b-3528-43bb-b54e-c229d389f867",
+      "name": "PrepareColdLead"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a professional B2B sales assistant.\n\nWrite a short personalized outreach email for this qualified HOT lead.\n\nLead information:\nName: {{ $json.full_name }}\nCompany: {{ $json.company }}\nJob title: {{ $json.job_title }}\nIndustry: {{ $json.industry }}\nCompany size: {{ $json.company_size }}\nCountry: {{ $json.country }}\n\nBusiness need:\n{{ $json.need }}\n\nBudget:\n€{{ $json.budget }}\n\nTimeline:\n{{ $json.timeline }}\n\nLead score:\n{{ $json.lead_score }}/100\n\nAI qualification reasoning:\n{{ $json.reasoning }}\n\nRecommended action:\n{{ $json.recommended_action }}\n\nRequirements:\n- Professional but natural tone\n- Personalized to the lead's company and need\n- Do not sound robotic or overly promotional\n- Maximum 130 words for the email body\n- Mention the specific automation need\n- Suggest a short discovery call\n- Do not invent facts\n- Do not mention the lead score or AI analysis to the prospect\n- Return the requested structured output only",
+        "hasOutputParser": true,
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        1960,
+        -900
+      ],
+      "id": "8dc88422-13f3-4356-96bf-cdf9bfe62f94",
+      "name": "DraftHotOutreach",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-120b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        1960,
+        -660
+      ],
+      "id": "6441a755-2896-492a-ac3d-600b9e0b0cb3",
+      "name": "Groq Chat Model1",
+      "credentials": {
+        "groqApi": {
+          "id": "TZVobcHlXhkV23Tx",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"subject\": {\n      \"type\": \"string\"\n    },\n    \"email_body\": {\n      \"type\": \"string\"\n    },\n    \"call_to_action\": {\n      \"type\": \"string\"\n    }\n  },\n  \"required\": [\n    \"subject\",\n    \"email_body\",\n    \"call_to_action\"\n  ]\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        2140,
+        -660
+      ],
+      "id": "9c7c815a-0213-4eff-b6e6-68c490eb5500",
+      "name": "Structured Output Parser1"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{\n{\n  ...$(\"PrepareHotLead\").item.json,\n\n  \"outreach_subject\": $json.output.subject,\n  \"outreach_email_body\": $json.output.email_body,\n  \"outreach_call_to_action\": $json.output.call_to_action,\n\n  \"outreach_status\": \"draft\",\n  \"lead_status\": \"qualified\",\n  \"record_updated_at\": $now.toISO()\n}\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        2440,
+        -900
+      ],
+      "id": "39acba95-1afb-4ba4-adf6-c76e960769ed",
+      "name": "BuildHotLeadRecord"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "E34NMADiGvBxNYvK",
+          "mode": "list",
+          "cachedResultName": "portfolio_leads",
+          "cachedResultUrl": "/projects/cWn8rG4KEJlMVD7r/datatables/E34NMADiGvBxNYvK"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "email",
+              "keyValue": "={{ $json.email }}"
+            }
+          ]
+        },
+        "limit": "={{ 1 }}",
+        "orderBy": true,
+        "orderByColumn": "id",
+        "orderByDirection": "ASC"
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        3460,
+        -80
+      ],
+      "id": "83f133ad-4ea3-4a00-97f7-5513853e2260",
+      "name": "CheckLeadExists",
+      "alwaysOutputData": true,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "2317045f-73c0-4f89-aafa-28d202a73d01",
+              "leftValue": "={{ $json.id != null }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        3740,
+        -80
+      ],
+      "id": "a02d53a5-3abb-4554-bc36-a0014e2a5cba",
+      "name": "LeadAlreadyExists"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{ $(\"LeadForStorage\").item.json }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        4020,
+        280
+      ],
+      "id": "1917f526-3c07-40b9-be41-64fca518d952",
+      "name": "PrepareLeadForInsert"
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "E34NMADiGvBxNYvK",
+          "mode": "list",
+          "cachedResultName": "portfolio_leads",
+          "cachedResultUrl": "/projects/cWn8rG4KEJlMVD7r/datatables/E34NMADiGvBxNYvK"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "lead_id",
+              "displayName": "lead_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "full_name",
+              "displayName": "full_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "company",
+              "displayName": "company",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "job_title",
+              "displayName": "job_title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "industry",
+              "displayName": "industry",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "company_size",
+              "displayName": "company_size",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "country",
+              "displayName": "country",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "budget",
+              "displayName": "budget",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "need",
+              "displayName": "need",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "timeline",
+              "displayName": "timeline",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "source",
+              "displayName": "source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "lead_score",
+              "displayName": "lead_score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "qualification",
+              "displayName": "qualification",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "priority",
+              "displayName": "priority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "reasoning",
+              "displayName": "reasoning",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "recommended_action",
+              "displayName": "recommended_action",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "qualified_at",
+              "displayName": "qualified_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "pipeline_stage",
+              "displayName": "pipeline_stage",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "action_type",
+              "displayName": "action_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "follow_up_within_hours",
+              "displayName": "follow_up_within_hours",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "assigned_team",
+              "displayName": "assigned_team",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "next_step",
+              "displayName": "next_step",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "outreach_subject",
+              "displayName": "outreach_subject",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "outreach_email_body",
+              "displayName": "outreach_email_body",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "outreach_call_to_action",
+              "displayName": "outreach_call_to_action",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "outreach_status",
+              "displayName": "outreach_status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "lead_status",
+              "displayName": "lead_status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "record_updated_at",
+              "displayName": "record_updated_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        4300,
+        280
+      ],
+      "id": "eb12ccba-d492-410b-a87c-9bdebd5b121e",
+      "name": "Insert row",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "E34NMADiGvBxNYvK",
+          "mode": "list",
+          "cachedResultName": "portfolio_leads",
+          "cachedResultUrl": "/projects/cWn8rG4KEJlMVD7r/datatables/E34NMADiGvBxNYvK"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "={{ $('CheckLeadExists').item.json.id }}"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "full_name": "={{ $json.full_name }}",
+            "email": "={{ $json.email }}",
+            "company": "={{ $json.company }}",
+            "job_title": "={{ $json.job_title }}",
+            "industry": "={{ $json.industry }}",
+            "company_size": "={{ $json.company_size }}",
+            "country": "={{ $json.country }}",
+            "budget": "={{ $json.budget }}",
+            "need": "={{ $json.need }}",
+            "timeline": "={{ $json.timeline }}",
+            "source": "={{ $json.source }}",
+            "lead_score": "={{ $json.lead_score }}",
+            "qualification": "={{ $json.qualification }}",
+            "priority": "={{ $json.priority }}",
+            "reasoning": "={{ $json.reasoning }}",
+            "recommended_action": "={{ $json.recommended_action }}",
+            "qualified_at": "={{ $json.qualified_at }}",
+            "pipeline_stage": "={{ $json.pipeline_stage }}",
+            "action_type": "={{ $json.action_type }}",
+            "follow_up_within_hours": "={{ $json.follow_up_within_hours }}",
+            "assigned_team": "={{ $json.assigned_team }}",
+            "next_step": "={{ $json.next_step }}",
+            "outreach_subject": "={{ $json.outreach_subject }}",
+            "outreach_email_body": "={{ $json.outreach_email_body }}",
+            "outreach_call_to_action": "={{ $json.outreach_call_to_action }}",
+            "outreach_status": "={{ $json.outreach_status }}",
+            "lead_status": "={{ $json.lead_status }}",
+            "record_updated_at": "={{ $json.record_updated_at }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "lead_id",
+              "displayName": "lead_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "full_name",
+              "displayName": "full_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "company",
+              "displayName": "company",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "job_title",
+              "displayName": "job_title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "industry",
+              "displayName": "industry",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "company_size",
+              "displayName": "company_size",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "country",
+              "displayName": "country",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "budget",
+              "displayName": "budget",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "need",
+              "displayName": "need",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "timeline",
+              "displayName": "timeline",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "source",
+              "displayName": "source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "lead_score",
+              "displayName": "lead_score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "qualification",
+              "displayName": "qualification",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "priority",
+              "displayName": "priority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "reasoning",
+              "displayName": "reasoning",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "recommended_action",
+              "displayName": "recommended_action",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "qualified_at",
+              "displayName": "qualified_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "pipeline_stage",
+              "displayName": "pipeline_stage",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "action_type",
+              "displayName": "action_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "follow_up_within_hours",
+              "displayName": "follow_up_within_hours",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "assigned_team",
+              "displayName": "assigned_team",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "next_step",
+              "displayName": "next_step",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "outreach_subject",
+              "displayName": "outreach_subject",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "outreach_email_body",
+              "displayName": "outreach_email_body",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "outreach_call_to_action",
+              "displayName": "outreach_call_to_action",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "outreach_status",
+              "displayName": "outreach_status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "lead_status",
+              "displayName": "lead_status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "record_updated_at",
+              "displayName": "record_updated_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        4300,
+        -440
+      ],
+      "id": "255a01c1-f447-4658-aa1a-2904f6fb3e5a",
+      "name": "UpdateLeadRecord",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{\n{\n  ...$('LeadForStorage').item.json,\n  lead_id: $('CheckLeadExists').item.json.lead_id\n}\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        4020,
+        -440
+      ],
+      "id": "d807529e-9381-4fc2-a167-0d92dd0df8a0",
+      "name": "PrepareLeadForUpdate"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "portfolio/lead",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1480,
+        80
+      ],
+      "id": "77212fd8-a297-41f7-84a8-3e9b959da9cd",
+      "name": "WebhookLead",
+      "webhookId": "94adb0d0-b328-4543-82fb-375331143fc2",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "9z3Jq0RojZ8JKAz1",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{\n{\n  \"lead_id\": $json.body.lead_id || (\"LEAD-\" + $now.toMillis()),\n  \"full_name\": ($json.body.full_name || \"\").trim(),\n  \"email\": ($json.body.email || \"\").trim().toLowerCase(),\n  \"company\": ($json.body.company || \"\").trim(),\n  \"job_title\": ($json.body.job_title || \"\").trim(),\n  \"industry\": ($json.body.industry || \"\").trim(),\n  \"company_size\": Number($json.body.company_size || 0),\n  \"country\": ($json.body.country || \"\").trim(),\n  \"budget\": Number($json.body.budget || 0),\n  \"need\": ($json.body.need || \"\").trim(),\n  \"timeline\": ($json.body.timeline || \"\").trim(),\n  \"source\": ($json.body.source || \"website\").trim()\n}\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        -1220,
+        80
+      ],
+      "id": "2fcebbc9-8483-40f5-b1a7-c712b6258ed9",
+      "name": "NormalizeLead"
+    },
+    {
+      "parameters": {
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        3180,
+        -80
+      ],
+      "id": "3404bd06-b546-4704-a5ad-c31db710488a",
+      "name": "LeadForStorage"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a professional B2B sales assistant.\n\nWrite a short, personalized follow-up email for a qualified WARM lead.\n\nThis lead is interested and potentially valuable, but should NOT receive an aggressive or urgent sales message.\n\nYour goal is to nurture the relationship, demonstrate relevance, and encourage a discovery call within the next few days.\n\nLead information:\n\n- Full name: {{ $json.full_name }}\n- Company: {{ $json.company }}\n- Job title: {{ $json.job_title }}\n- Industry: {{ $json.industry }}\n- Company size: {{ $json.company_size }}\n- Country: {{ $json.country }}\n- Budget: {{ $json.budget }}\n- Need: {{ $json.need }}\n- Timeline: {{ $json.timeline }}\n- Lead score: {{ $json.lead_score }}\n- Priority: {{ $json.priority }}\n- AI reasoning: {{ $json.reasoning }}\n- Recommended action: {{ $json.recommended_action }}\n\nWrite a concise and professional email.\n\nRequirements:\n- Personalize the message using the lead and company information.\n- Mention their business need naturally.\n- Do not be overly aggressive or urgent.\n- Focus on helping and exploring whether our AI automation solution is relevant.\n- Suggest a short discovery call within the next 3 days.\n- Keep the email concise.\n- Do not invent information that is not provided.\n\nReturn:\n- subject\n- email_body\n- call_to_action",
+        "hasOutputParser": true,
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        1960,
+        -80
+      ],
+      "id": "0a0ba845-606a-4262-bfc0-a2831584aa4a",
+      "name": "DraftWarmOutreach",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-120b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        1960,
+        160
+      ],
+      "id": "12d6a4ee-0cb2-46de-8ff3-41561980cfc0",
+      "name": "Groq Chat Model2",
+      "credentials": {
+        "groqApi": {
+          "id": "TZVobcHlXhkV23Tx",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n  \"subject\": \"string\",\n  \"email_body\": \"string\",\n  \"call_to_action\": \"string\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        2140,
+        160
+      ],
+      "id": "428be881-04b0-4134-aefe-7a09e5ff5efc",
+      "name": "Structured Output Parser2"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{\n{\n  ...$(\"PrepareWarmLead\").item.json,\n\n  \"outreach_subject\": $json.output.subject,\n  \"outreach_email_body\": $json.output.email_body,\n  \"outreach_call_to_action\": $json.output.call_to_action,\n\n  \"outreach_status\": \"draft\",\n  \"lead_status\": \"qualified\",\n  \"record_updated_at\": $now\n}\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        2440,
+        -80
+      ],
+      "id": "43c0705a-503e-4a15-8f99-85605756f962",
+      "name": "BuildWarmLeadRecord"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a professional B2B sales assistant.\n\nWrite a short, personalized nurture email for a COLD lead.\n\nThis lead is not ready to buy yet. The goal is NOT to push for a sale or an immediate meeting.\nThe goal is to provide value, stay relevant, and keep the relationship warm for the future.\n\nLead information:\n- Name: {{ $json.full_name }}\n- Company: {{ $json.company }}\n- Job title: {{ $json.job_title }}\n- Industry: {{ $json.industry }}\n- Company size: {{ $json.company_size }}\n- Country: {{ $json.country }}\n- Budget: {{ $json.budget }}\n- Need: {{ $json.need }}\n- Timeline: {{ $json.timeline }}\n- Lead score: {{ $json.lead_score }}\n- Qualification: {{ $json.qualification }}\n- Priority: {{ $json.priority }}\n- Recommended action: {{ $json.recommended_action }}\n\nRequirements:\n- Keep the email concise and professional.\n- Make it personalized to the lead and company.\n- Do not use aggressive sales language.\n- Do not pressure the lead into booking a call.\n- Offer useful educational content, ideas, or a relevant resource.\n- The call to action should be low-pressure.\n- Do not invent facts about the company.\n- Do not invent case studies, statistics, customer names, or results.\n- Do not include placeholders such as [Your Name].\n\nReturn:\n- subject\n- email_body\n- call_to_action\nImportant:\n- Do not include any placeholders such as [Your Name], [Your Company], [Name], or similar.\n- Do not claim that a guide, document, case study, link, or resource exists unless it was explicitly provided in the lead data.\n- If offering value, offer to share ideas or examples rather than claiming an existing resource is available.\n- End the email naturally without a fake signature.",
+        "hasOutputParser": true,
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        1960,
+        740
+      ],
+      "id": "ac85b117-191a-412a-bd9a-17685f3c706f",
+      "name": "DraftColdOutreach",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-120b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        1960,
+        980
+      ],
+      "id": "a00711d7-681c-4e34-8fba-5acc43601ba1",
+      "name": "Groq Chat Model3",
+      "credentials": {
+        "groqApi": {
+          "id": "TZVobcHlXhkV23Tx",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"subject\": \"A useful AI automation resource for your team\",\n  \"email_body\": \"Hi there, I wanted to share a useful idea that may help your team explore AI automation at your own pace.\",\n  \"call_to_action\": \"Happy to send over a few practical examples if useful.\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        2140,
+        980
+      ],
+      "id": "efd47359-9657-41ce-a74a-d40e7b589930",
+      "name": "Structured Output Parser3"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{\n{\n  ...$(\"PrepareColdLead\").item.json,\n\n  \"outreach_subject\": $json.output.subject,\n  \"outreach_email_body\": $json.output.email_body,\n  \"outreach_call_to_action\": $json.output.call_to_action,\n\n  \"outreach_status\": \"draft\",\n  \"lead_status\": \"nurturing\",\n  \"record_updated_at\": $now\n}\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        2440,
+        740
+      ],
+      "id": "1c8723e1-2d78-4791-97b9-d111a8925787",
+      "name": "BuildColdLeadRecord"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{\n{\n  \"success\": true,\n  \"status\": \"updated\",\n  \"lead_id\": $json.lead_id,\n  \"email\": $json.email,\n  \"qualification\": $json.qualification,\n  \"lead_score\": $json.lead_score,\n  \"message\": \"Lead updated successfully\"\n}\n}}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        5200,
+        -440
+      ],
+      "id": "63b84944-ed64-478f-ba89-980edbc56704",
+      "name": "RespondUpdated"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{\n{\n  \"success\": true,\n  \"status\": \"created\",\n  \"lead_id\": $json.lead_id,\n  \"email\": $json.email,\n  \"qualification\": $json.qualification,\n  \"lead_score\": $json.lead_score,\n  \"message\": \"Lead created successfully\"\n}\n}}",
+        "options": {
+          "responseCode": 201
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        5200,
+        280
+      ],
+      "id": "9f83c5d2-3e35-4ec0-b9b7-151de8efb592",
+      "name": "RespondCreated"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{\n{\n  \"success\": false,\n  \"status\": \"rejected\",\n  \"error\": \"invalid_lead\",\n  \"message\": \"Missing or invalid required fields\"\n}\n}}",
+        "options": {
+          "responseCode": 400
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        -380,
+        360
+      ],
+      "id": "475b6941-89e4-4390-8ad5-dcc9ad7c6d48",
+      "name": "RespondInvalidLead"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{\n{\n  \"success\": false,\n  \"status\": \"error\",\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}\n}}",
+        "options": {
+          "responseCode": 500
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        4300,
+        -1480
+      ],
+      "id": "7e12e772-f170-4bf3-a61a-75048b91e7e4",
+      "name": "RespondInternalError"
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "sy4uMqi6ZrqHnRBL",
+          "mode": "list",
+          "cachedResultName": "portfolio_lead_events",
+          "cachedResultUrl": "/projects/cWn8rG4KEJlMVD7r/datatables/sy4uMqi6ZrqHnRBL"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "event_id": "={{ 'EVT-' + $execution.id + '-created' }}",
+            "lead_id": "={{ $('PrepareLeadForInsert').item.json.lead_id }}",
+            "email": "={{ $('PrepareLeadForInsert').item.json.email }}",
+            "event_type": "=created",
+            "qualification": "={{ $('PrepareLeadForInsert').item.json.qualification }}",
+            "lead_score": "={{ $('PrepareLeadForInsert').item.json.lead_score }}",
+            "status": "=success",
+            "source": "={{ $('PrepareLeadForInsert').item.json.source }}",
+            "execution_id": "={{ $execution.id }}",
+            "occurred_at": "={{ $now }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "event_id",
+              "displayName": "event_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "lead_id",
+              "displayName": "lead_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "event_type",
+              "displayName": "event_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "qualification",
+              "displayName": "qualification",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "lead_score",
+              "displayName": "lead_score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "source",
+              "displayName": "source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "execution_id",
+              "displayName": "execution_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "occurred_at",
+              "displayName": "occurred_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "error_type",
+              "displayName": "error_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "error_message",
+              "displayName": "error_message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        4900,
+        280
+      ],
+      "id": "5d34abe4-ff1f-4113-bb78-764f9fc8ba63",
+      "name": "LogCreatedLead",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "sy4uMqi6ZrqHnRBL",
+          "mode": "list",
+          "cachedResultName": "portfolio_lead_events",
+          "cachedResultUrl": "/projects/cWn8rG4KEJlMVD7r/datatables/sy4uMqi6ZrqHnRBL"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "event_id": "={{ 'EVT-' + $execution.id + '-updated' }}",
+            "lead_id": "={{ $('PrepareLeadForUpdate').item.json.lead_id }}",
+            "email": "={{ $('PrepareLeadForUpdate').item.json.email }}",
+            "event_type": "updated",
+            "qualification": "={{ $('PrepareLeadForUpdate').item.json.qualification }}",
+            "lead_score": "={{ $('PrepareLeadForUpdate').item.json.lead_score }}",
+            "status": "success",
+            "source": "={{ $('PrepareLeadForUpdate').item.json.source }}",
+            "execution_id": "={{ $execution.id }}",
+            "occurred_at": "={{ $now }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "event_id",
+              "displayName": "event_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "lead_id",
+              "displayName": "lead_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "event_type",
+              "displayName": "event_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "qualification",
+              "displayName": "qualification",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "lead_score",
+              "displayName": "lead_score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "source",
+              "displayName": "source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "execution_id",
+              "displayName": "execution_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "occurred_at",
+              "displayName": "occurred_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "error_type",
+              "displayName": "error_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "error_message",
+              "displayName": "error_message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        4900,
+        -440
+      ],
+      "id": "d5f62794-d7a1-4c6e-9b21-748443c100a2",
+      "name": "LogUpdatedLead",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "sy4uMqi6ZrqHnRBL",
+          "mode": "list",
+          "cachedResultName": "portfolio_lead_events",
+          "cachedResultUrl": "/projects/cWn8rG4KEJlMVD7r/datatables/sy4uMqi6ZrqHnRBL"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "event_id": "={{ 'EVT-' + $execution.id + '-rejected' }}",
+            "lead_id": "={{ $json.lead_id || '' }}",
+            "email": "={{ $json.email || '' }}",
+            "event_type": "rejected",
+            "status": "rejected",
+            "source": "={{ $json.source || 'unknown' }}",
+            "execution_id": "={{ $execution.id }}",
+            "occurred_at": "={{ $now }}",
+            "error_type": "invalid_lead",
+            "error_message": "Missing or invalid required fields"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "event_id",
+              "displayName": "event_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "lead_id",
+              "displayName": "lead_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "event_type",
+              "displayName": "event_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "qualification",
+              "displayName": "qualification",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "lead_score",
+              "displayName": "lead_score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "source",
+              "displayName": "source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "execution_id",
+              "displayName": "execution_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "occurred_at",
+              "displayName": "occurred_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "error_type",
+              "displayName": "error_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "error_message",
+              "displayName": "error_message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -660,
+        360
+      ],
+      "id": "b3694450-9609-4851-bd69-6d0a05f8b4ca",
+      "name": "LogRejectedLead",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "sy4uMqi6ZrqHnRBL",
+          "mode": "list",
+          "cachedResultName": "portfolio_lead_events",
+          "cachedResultUrl": "/projects/cWn8rG4KEJlMVD7r/datatables/sy4uMqi6ZrqHnRBL"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "event_id": "={{ 'EVT-' + $execution.id + '-error' }}",
+            "lead_id": "={{ $('ValidateLead').item.json.lead_id || '' }}",
+            "email": "={{ $('ValidateLead').item.json.email || '' }}",
+            "event_type": "internal_error",
+            "status": "error",
+            "source": "={{ $('ValidateLead').item.json.source || 'unknown' }}",
+            "execution_id": "={{ $execution.id }}",
+            "occurred_at": "={{ $now }}",
+            "error_type": "={{ $json.error?.name || $json.error?.type || 'internal_server_error' }}",
+            "error_message": "={{ $json.error?.message || $json.message || 'An unexpected error occurred' }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "event_id",
+              "displayName": "event_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "lead_id",
+              "displayName": "lead_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "event_type",
+              "displayName": "event_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "qualification",
+              "displayName": "qualification",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "lead_score",
+              "displayName": "lead_score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "source",
+              "displayName": "source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "execution_id",
+              "displayName": "execution_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "occurred_at",
+              "displayName": "occurred_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "error_type",
+              "displayName": "error_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "error_message",
+              "displayName": "error_message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        3940,
+        -1480
+      ],
+      "id": "6ea19006-5a6b-43a8-a1ae-6657ecb62260",
+      "name": "LogInternalError",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "content": "## 01 — INPUT & VALIDATION\n**Purpose:** receive, normalize and validate lead data.\n\n- `WebhookLead`: secured POST endpoint (`/portfolio/lead`)\n- `TriggerManual`: local/manual testing\n- `NormalizeLead`: sanitizes and standardizes input\n- `ValidateLead`: checks required fields\n- Invalid lead → audit event → HTTP **400**",
+        "height": 1100,
+        "width": 1600
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1600,
+        -400
+      ],
+      "id": "5996a736-d4cc-48ef-b014-529b6446d7d4",
+      "name": "Sticky - 01 Input & Validation"
+    },
+    {
+      "parameters": {
+        "content": "## 02 — AI QUALIFICATION\n**Purpose:** score each valid lead with structured AI output.\n\nScoring dimensions: budget, urgency, authority, company fit and need clarity.\n\nOutput: `lead_score`, `qualification` (hot / warm / cold), `priority`, reasoning and recommended action.",
+        "height": 800,
+        "width": 1000
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        120,
+        -400
+      ],
+      "id": "ef09cfce-bd0b-4e26-a030-0ed7c9561357",
+      "name": "Sticky - 02 AI Qualification"
+    },
+    {
+      "parameters": {
+        "content": "## 03 — LEAD ROUTING & AI OUTREACH\n**Purpose:** route the qualified lead and draft the right follow-up.\n\n- **HOT** → immediate sales follow-up\n- **WARM** → nurturing / discovery follow-up\n- **COLD** → low-pressure nurture message\n\nEach branch uses structured AI output for subject, email body and CTA.",
+        "height": 2300,
+        "width": 1700
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1240,
+        -1100
+      ],
+      "id": "dd36f8e2-828e-480c-891d-ae24cb4255c2",
+      "name": "Sticky - 03 Routing & Outreach"
+    },
+    {
+      "parameters": {
+        "content": "## 04 — STORAGE & DEDUPLICATION\n**Purpose:** keep one current record per lead.\n\n`CheckLeadExists` searches by normalized email.\n\n- Existing email → update the record while preserving `lead_id`\n- New email → insert a new record\n\nOperational Data Table errors are sent to the central error logger.",
+        "height": 1200,
+        "width": 1600
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3060,
+        -660
+      ],
+      "id": "9c211aee-edc2-4960-98b1-a1208a0fa176",
+      "name": "Sticky - 04 Storage & Deduplication"
+    },
+    {
+      "parameters": {
+        "content": "## 05 — AUDIT LOGGING & API RESPONSES\n**Purpose:** create an event trail and return explicit API status codes.\n\n- Created → HTTP **201**\n- Updated → HTTP **200**\n- Invalid input → HTTP **400** (kept beside validation)\n- Internal failure → HTTP **500**\n- Bad webhook authentication is rejected before workflow execution.",
+        "height": 1200,
+        "width": 900
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        4780,
+        -660
+      ],
+      "id": "c487cac2-ef0b-4ec0-be32-300d1df44eeb",
+      "name": "Sticky - 05 Audit & API Responses"
+    },
+    {
+      "parameters": {
+        "content": "## 06 — CENTRAL ERROR HANDLING\nCritical AI / storage failures → `LogInternalError` → HTTP **500**.\n\nAudit-logger failures bypass the logger and go directly to the 500 responder, preventing recursive logging failures.\n\nPublic error responses stay generic; technical context remains in the audit table when logging succeeds.",
+        "height": 430,
+        "width": 1000
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3820,
+        -1650
+      ],
+      "id": "216af392-eef2-4004-bfbe-96dfbe19e8cf",
+      "name": "Sticky - 06 Central Error Handling"
+    },
+    {
+      "parameters": {
+        "content": "# AI Lead Qualification System\n**Portfolio workflow — n8n + Groq + Data Tables**\n\nSecure lead intake → validation → AI scoring → hot/warm/cold routing → AI outreach draft → deduplicated storage → audit trail → explicit API responses.\n\n**Regression validated:** 201 create · 200 update · 400 invalid · 500 internal error · 403 bad auth.",
+        "height": 300,
+        "width": 2500
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1600,
+        -780
+      ],
+      "id": "a65ad6db-c6e1-4d09-9a48-4b28520753c7",
+      "name": "Sticky - Portfolio Overview"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "TriggerManual": {
+      "main": [
+        [
+          {
+            "node": "MockLead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MockLead": {
+      "main": [
+        [
+          {
+            "node": "ValidateLead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ValidateLead": {
+      "main": [
+        [
+          {
+            "node": "QualifyLeadWithAI",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "LogRejectedLead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "QualifyLeadWithAI",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "QualifyLeadWithAI",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "QualifyLeadWithAI": {
+      "main": [
+        [
+          {
+            "node": "BuildQualifiedLead",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "LogInternalError",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BuildQualifiedLead": {
+      "main": [
+        [
+          {
+            "node": "RouteLead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RouteLead": {
+      "main": [
+        [
+          {
+            "node": "PrepareHotLead",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "PrepareWarmLead",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "PrepareColdLead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PrepareHotLead": {
+      "main": [
+        [
+          {
+            "node": "DraftHotOutreach",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "DraftHotOutreach",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "DraftHotOutreach",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DraftHotOutreach": {
+      "main": [
+        [
+          {
+            "node": "BuildHotLeadRecord",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "LogInternalError",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BuildHotLeadRecord": {
+      "main": [
+        [
+          {
+            "node": "LeadForStorage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CheckLeadExists": {
+      "main": [
+        [
+          {
+            "node": "LeadAlreadyExists",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "LogInternalError",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LeadAlreadyExists": {
+      "main": [
+        [
+          {
+            "node": "PrepareLeadForUpdate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "PrepareLeadForInsert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PrepareLeadForInsert": {
+      "main": [
+        [
+          {
+            "node": "Insert row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PrepareLeadForUpdate": {
+      "main": [
+        [
+          {
+            "node": "UpdateLeadRecord",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WebhookLead": {
+      "main": [
+        [
+          {
+            "node": "NormalizeLead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NormalizeLead": {
+      "main": [
+        [
+          {
+            "node": "ValidateLead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LeadForStorage": {
+      "main": [
+        [
+          {
+            "node": "CheckLeadExists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PrepareWarmLead": {
+      "main": [
+        [
+          {
+            "node": "DraftWarmOutreach",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "DraftWarmOutreach",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser2": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "DraftWarmOutreach",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DraftWarmOutreach": {
+      "main": [
+        [
+          {
+            "node": "BuildWarmLeadRecord",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "LogInternalError",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BuildWarmLeadRecord": {
+      "main": [
+        [
+          {
+            "node": "LeadForStorage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PrepareColdLead": {
+      "main": [
+        [
+          {
+            "node": "DraftColdOutreach",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "DraftColdOutreach",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser3": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "DraftColdOutreach",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DraftColdOutreach": {
+      "main": [
+        [
+          {
+            "node": "BuildColdLeadRecord",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "LogInternalError",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BuildColdLeadRecord": {
+      "main": [
+        [
+          {
+            "node": "LeadForStorage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "UpdateLeadRecord": {
+      "main": [
+        [
+          {
+            "node": "LogUpdatedLead",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "LogInternalError",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert row": {
+      "main": [
+        [
+          {
+            "node": "LogCreatedLead",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "LogInternalError",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RespondInvalidLead": {
+      "main": [
+        [
+          {
+            "node": "RejectInvalidLead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LogCreatedLead": {
+      "main": [
+        [
+          {
+            "node": "RespondCreated",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "RespondInternalError",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LogUpdatedLead": {
+      "main": [
+        [
+          {
+            "node": "RespondUpdated",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "RespondInternalError",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LogRejectedLead": {
+      "main": [
+        [
+          {
+            "node": "RespondInvalidLead",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "RespondInternalError",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LogInternalError": {
+      "main": [
+        [
+          {
+            "node": "RespondInternalError",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "RespondInternalError",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "nodeGroups": [],
+  "tags": []
+}
